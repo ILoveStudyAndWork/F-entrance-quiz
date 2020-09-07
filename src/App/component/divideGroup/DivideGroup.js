@@ -1,6 +1,6 @@
 import React from 'react'
 import GroupItem from './GroupItem';
-
+import './DivideGroup.css'
 class DivideGroup extends React.Component {
   constructor(props) {
     super(props);

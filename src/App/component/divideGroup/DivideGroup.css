@@ -1,0 +1,32 @@
+.list-header {
+    text-align: center;
+    background-color: #929BAB;
+    height: 30px;
+    color: white;
+    margin:0
+}
+
+.list-header >p {
+    margin: 0;
+    line-height:30px ;
+}
+
+.list-student-group {
+    border: 1px #929BAB solid;
+    margin: 20px;
+}
+
+.student-container {
+    columns:100px 6;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.student-card{
+    text-align: center;
+    line-height: 30px;
+    background-color: #eeeeee;
+    height: 30px;
+    width: 100px;
+    margin: 10px;
+}
