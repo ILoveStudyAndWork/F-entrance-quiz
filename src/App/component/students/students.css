@@ -1,0 +1,14 @@
+
+.student-container {
+    columns:100px 8;
+    display: flex;
+    flex-wrap: wrap;
+}
+.student-card{
+    text-align: center;
+    line-height: 30px;
+    background-color: #eeeeee;
+    height: 30px;
+    width: 100px;
+    margin: 10px;
+}
