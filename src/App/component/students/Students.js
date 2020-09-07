@@ -13,7 +13,6 @@ class Students extends React.Component {
     const url = 'http://localhost:8080/students'
     fetch(url)
       .then(result => {
-        console.log(result);
         return result.json()
       })
       .catch(error => {
