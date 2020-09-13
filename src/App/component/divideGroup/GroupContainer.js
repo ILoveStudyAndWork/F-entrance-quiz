@@ -5,10 +5,6 @@ import './GroupContainer.css'
 class GroupContainer extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isDivided:false,
-    };
   }
 
   render() {

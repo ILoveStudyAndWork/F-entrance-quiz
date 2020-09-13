@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <div data-testid="app" className="App">
         <button className='btn-divide' onClick={this.divideRequest}>分组学员</button>
-        <GroupContainer groups={this.state.groups}/>
+        {this.state.isDivided && <GroupContainer groups={this.state.groups} /> }
         <Students />
       </div>
     );
