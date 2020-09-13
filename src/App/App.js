@@ -9,7 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       isDivided:false,
-      groups:[]
+      groups:[],
+      allStudents:[]
     };
 
   }
@@ -34,12 +35,38 @@ class App extends Component {
       )
   }
 
+  handleAddStudentSuccess(){
+    this.getStudentList();
+  }
+
+  componentDidMount() {
+    this.getStudentList();
+  }
+
+  getStudentList(){
+    const url = 'http://localhost:8080/students'
+    fetch(url)
+      .then(result => {
+        return result.json()
+      })
+      .catch(error => {
+        console.log(error);
+      })
+      .then(json => {
+        this.setState({
+          allStudents:json
+        })
+      })
+  }
+
+
   render() {
     return (
       <div data-testid="app" className="App">
         <button className='btn-divide' onClick={this.divideRequest}>分组学员</button>
         {this.state.isDivided && <GroupContainer groups={this.state.groups} /> }
-        <Students />
+        <Students allStudents={this.state.allStudents}
+                  handleAddStudentSuccess={this.handleAddStudentSuccess.bind(this)} />
       </div>
     );
   }

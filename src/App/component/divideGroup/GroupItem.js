@@ -1,5 +1,6 @@
 import React from 'react'
 import StudentContainer from '../students/StudentContainer';
+import StudentGroup from './StudentGroup';
 class GroupItem extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,7 @@ class GroupItem extends React.Component {
       <div>
         <div className='list-student-group'>
           <div className='list-header'><p>{this.props.name}</p></div>
-          <StudentContainer allStudents={this.props.students}
+          <StudentGroup allStudents={this.props.students}
                             name={this.props.name}/>
         </div>
       </div>

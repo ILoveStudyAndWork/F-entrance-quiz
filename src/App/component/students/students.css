@@ -11,7 +11,23 @@
     width: 100px;
     margin: 10px;
 }
+
 .btn-add-stu {
-    background-color: #f7f7f7;
-    border:1px #eeeeee solid;
+    text-align: center;
+    line-height: 30px;
+    background-color: #eeeeee;
+    height: 30px;
+    width: 100px;
+    margin: 10px;
+    border:none;
+    outline: 1px gray solid;
+}
+.input-add-stu {
+    text-align: center;
+    line-height: 30px;
+    height: 30px;
+    width: 100px;
+    margin: 10px;
+    border:none;
+    outline: 1px gray solid;
 }
