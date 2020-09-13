@@ -1,7 +1,8 @@
 import React from 'react'
 import GroupItem from './GroupItem';
-import './DivideGroup.css'
-class DivideGroup extends React.Component {
+import './GroupContainer.css'
+
+class GroupContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -13,8 +14,8 @@ class DivideGroup extends React.Component {
   render() {
     const groupList = this.props.groups.map(item =>
     {
-      const { students, groupName} = item;
-      return <GroupItem students={students}
+      const { studentList, groupName} = item;
+      return <GroupItem students={studentList}
                         key={groupName}
                         name={groupName}/>
     })
@@ -27,6 +28,6 @@ class DivideGroup extends React.Component {
   }
 }
 
-DivideGroup.propTypes = {};
+GroupContainer.propTypes = {};
 
-export default DivideGroup;
+export default GroupContainer;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import Students from './component/students/Students';
-import DivideGroup from './component/divideGroup/DivideGroup';
+import GroupContainer from './component/divideGroup/GroupContainer';
 
 class App extends Component {
 
@@ -13,9 +13,13 @@ class App extends Component {
     };
 
   }
+
   divideRequest= () =>{
     const url = 'http://localhost:8080/students/groups';
-    fetch(url)
+    const options = {
+      method:'POST'
+    }
+    fetch(url, options)
       .then(result => {
         return result.json()
       })
@@ -34,7 +38,7 @@ class App extends Component {
     return (
       <div data-testid="app" className="App">
         <button className='btn-divide' onClick={this.divideRequest}>分组学员</button>
-        <DivideGroup groups={this.state.groups}/>
+        <GroupContainer groups={this.state.groups}/>
         <Students />
       </div>
     );

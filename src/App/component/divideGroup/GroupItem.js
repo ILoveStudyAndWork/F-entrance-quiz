@@ -12,10 +12,8 @@ class GroupItem extends React.Component {
       <div>
         <div className='list-student-group'>
           <div className='list-header'><p>{this.props.name}</p></div>
-            <div className="student-container">
-              <StudentContainer allStudents={this.props.students}
-                                name={this.props.name}/>
-            </div>
+          <StudentContainer allStudents={this.props.students}
+                            name={this.props.name}/>
         </div>
       </div>
     );

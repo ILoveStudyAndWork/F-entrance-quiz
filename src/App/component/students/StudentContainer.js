@@ -6,15 +6,26 @@ class StudentContainer extends React.Component {
     super(props);
 
     this.state = {};
+  }
+
+  addStudent() {
 
   }
 
   render() {
-    return this.props.allStudents.map(item =>
-      <Student id={item.id}
-               key={item.id}
-               name={item.name} />)
+    const  allStudents = this.props.allStudents.map(
+      item =>
+        <Student id={item.id}
+                 key={item.id}
+                 name={item.name} />)
+
+    return <div className="student-container">
+      {allStudents}
+
+    </div>
   }
+
+
 }
 
 StudentContainer.propTypes = {};
