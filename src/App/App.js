@@ -34,7 +34,7 @@ class App extends Component {
         <GroupContainer groups={this.state.groups}
                         handleChangeTeamNameSuccess={this.handleChangeTeamNameSuccess.bind(this)} /> }
         <TrainerContainer />
-        <TraineeContainer />
+        <TraineeContainer history={this.props.history} />
 
       </div>
     );

@@ -6,7 +6,6 @@ class TraineeContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addButtonHide: false,
       allTrainees:[],
       deleteModalVisible:false,
       deleteTrainee:'',
@@ -14,15 +13,8 @@ class TraineeContainer extends React.Component {
   }
 
   handleAddButtonClick = () => {
-    this.setState({
-      addButtonHide: true,
-    })
+
   }
-
-
-  addTrainee = () =>  {
-  }
-
 
   componentDidMount() {
     this.getTraineeList();
@@ -93,17 +85,14 @@ class TraineeContainer extends React.Component {
         <div className="student-container">
           <div className="student-list">
             {allTrainees}
-            {this.state.addButtonHide ? <input type="text"
-                                               className='input-add-stu'
-                                               onKeyDown={this.addTrainee}/>
-              : <button className='btn-add-stu'
-                        onClick={this.handleAddButtonClick}>+ 添加学员
-              </button>}
-
+            <button className='btn-add-stu'
+                    onClick={() => this.props.history.push('/trainee/create')}>
+                <a href="#/trainee/create">+ 添加学员</a>
+              </button>
           </div>
         </div>
         <Modal
-          title="删除用户"
+          title="删除学员"
           visible={this.state.deleteModalVisible}
           onOk={this.deleteTrainee}
           onCancel={this.handleCancel}
