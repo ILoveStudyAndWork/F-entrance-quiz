@@ -10,10 +10,12 @@ class GroupContainer extends React.Component {
   render() {
     const groupList = this.props.groups.map(item =>
     {
-      const { studentList, groupName} = item;
+      const { studentList, groupName, id} = item;
       return <GroupItem students={studentList}
                         key={groupName}
-                        name={groupName}/>
+                        id={id}
+                        name={groupName}
+                        handleChangeTeamNameSuccess={this.props.handleChangeTeamNameSuccess}/>
     })
     return (
       <div>

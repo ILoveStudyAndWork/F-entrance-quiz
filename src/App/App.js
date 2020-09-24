@@ -16,27 +16,15 @@ class App extends Component {
   }
 
   divideRequest= () =>{
-    const url = 'http://localhost:8080/students/groups';
-    const options = {
-      method:'POST'
-    }
-    fetch(url, options)
-      .then(result => {
-        return result.json()
-      })
-      .catch(error => {
-      })
-      .then(json =>{
-          this.setState({
-            groups:json,
-            isDivided: true
-          })
-        }
-      )
+
   }
 
   handleAddStudentSuccess(){
     this.getStudentList();
+  }
+
+   handleChangeTeamNameSuccess(){
+
   }
 
   componentDidMount() {
@@ -44,7 +32,7 @@ class App extends Component {
   }
 
   getStudentList(){
-    const url = 'http://localhost:8080/students'
+    const url = 'http://localhost:8080/trainees?grouped=false'
     fetch(url)
       .then(result => {
         return result.json()
@@ -64,7 +52,9 @@ class App extends Component {
     return (
       <div data-testid="app" className="App">
         <button className='btn-divide' onClick={this.divideRequest}>分组学员</button>
-        {this.state.isDivided && <GroupContainer groups={this.state.groups} /> }
+        {this.state.isDivided &&
+        <GroupContainer groups={this.state.groups}
+                        handleChangeTeamNameSuccess={this.handleChangeTeamNameSuccess.bind(this)} /> }
         <Students allStudents={this.state.allStudents}
                   handleAddStudentSuccess={this.handleAddStudentSuccess.bind(this)} />
       </div>

@@ -6,7 +6,6 @@ class Students extends React.Component {
     super(props);
   }
 
-
   render() {
     return (
       <div>

@@ -17,31 +17,8 @@ class StudentContainer extends React.Component {
   }
 
 
-  addStudent = (event) =>  {
-    const ENTER_KEY_CODE = 13;
-    const HTTP_CREATE = 201;
-    const requestBody = `{\"name\":\"${event.target.value}\"}`
-    if (event.keyCode === ENTER_KEY_CODE){
-      const url = 'http://localhost:8080/students'
-      const options = {
-        method:'POST',
-        headers:{
-          'content-type':'application/json'
-        },
-        body:requestBody
-      }
+   addStudent = () =>  {
 
-      fetch(url, options)
-        .then(response => {
-          if (response.status === HTTP_CREATE){
-            this.props.handleAddStudentSuccess();
-          }
-          this.setState({
-            addButtonHide:false,
-          })
-        })
-
-    }
   }
 
   render() {
@@ -55,13 +32,13 @@ class StudentContainer extends React.Component {
       {allStudents}
       {this.state.addButtonHide ? <input type="text"
                                          className='input-add-stu'
-                                         onKeyDown={this.addStudent}/> :
-        <button className='btn-add-stu'
-                onClick={this.handleAddButtonClick}>+ 添加学员</button>}
+                                         onKeyDown={this.addStudent}/>
+                                 : <button className='btn-add-stu'
+                                           onClick={this.handleAddButtonClick}>+ 添加学员
+                                    </button>}
 
     </div>
   }
-
 
 }
 
