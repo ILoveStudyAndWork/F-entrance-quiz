@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Students from './component/students/Students';
+import 'antd/dist/antd.min.css';
+import TraineeContainer from './component/TraineeContainer/TraineeContainer';
 import GroupContainer from './component/divideGroup/GroupContainer';
+import TrainerContainer from './component/TrainerContainer/TrainerContainer';
 
 class App extends Component {
 
@@ -10,7 +12,8 @@ class App extends Component {
     this.state = {
       isDivided:false,
       groups:[],
-      allStudents:[]
+      allTrainees:[],
+      allTrainers:[]
     };
 
   }
@@ -19,30 +22,48 @@ class App extends Component {
 
   }
 
-  handleAddStudentSuccess(){
-    this.getStudentList();
+  handleAddTraineeSuccess(){
+    this.getTraineeList();
   }
 
    handleChangeTeamNameSuccess(){
 
   }
 
-  componentDidMount() {
-    this.getStudentList();
+  handleAddTrainerSuccess(){
+    this.getTrainerList();
   }
 
-  getStudentList(){
+  componentDidMount() {
+    this.getTraineeList();
+    this.getTrainerList();
+  }
+
+  getTraineeList(){
     const url = 'http://localhost:8080/trainees?grouped=false'
     fetch(url)
       .then(result => {
         return result.json()
       })
-      .catch(error => {
-        console.log(error);
-      })
+      .catch(Error)
       .then(json => {
         this.setState({
-          allStudents:json
+          allTrainees:json
+        })
+      })
+  }
+
+
+  getTrainerList(){
+    const url = 'http://localhost:8080/trainers?grouped=false'
+    fetch(url)
+      .then(result => {
+        return result.json()
+      })
+      .catch(Error)
+      .then(json => {
+        this.setState({
+          allTrainers:json
         })
       })
   }
@@ -55,8 +76,11 @@ class App extends Component {
         {this.state.isDivided &&
         <GroupContainer groups={this.state.groups}
                         handleChangeTeamNameSuccess={this.handleChangeTeamNameSuccess.bind(this)} /> }
-        <Students allStudents={this.state.allStudents}
-                  handleAddStudentSuccess={this.handleAddStudentSuccess.bind(this)} />
+        <TrainerContainer allTrainers={this.state.allTrainers}
+                          handleAddTrainerSuccess={this.handleAddTrainerSuccess.bind(this)} />
+        <TraineeContainer allTrainees={this.state.allTrainees}
+                          handleAddTraineeSuccess={this.handleAddTraineeSuccess.bind(this)} />
+
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import StudentGroup from './StudentGroup';
+import Trainee from '../TraineeContainer/Trainee';
 
 class GroupItem extends React.Component {
   constructor(props) {
@@ -10,18 +10,23 @@ class GroupItem extends React.Component {
   }
 
   render() {
+    const  allStudents = this.props.allStudents.map(
+      item =>
+        <Trainee id={item.id}
+                 key={item.id}
+                 name={item.name} />)
     return (
       <div>
         <div className='list-student-group'>
           <div className='list-header'>
-
             <input type="text"
                    className='input-group-name'
                    defaultValue={this.state.teamName}
                    onKeyDown={this.changeTeamName} />
           </div>
-          <StudentGroup allStudents={this.props.students}
-                            name={this.props.name}/>
+          <div className="student-list">
+            {allStudents}
+          </div>
         </div>
       </div>
     );
