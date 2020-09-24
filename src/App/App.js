@@ -12,8 +12,6 @@ class App extends Component {
     this.state = {
       isDivided:false,
       groups:[],
-      allTrainees:[],
-      allTrainers:[]
     };
 
   }
@@ -22,50 +20,9 @@ class App extends Component {
 
   }
 
-  handleAddTraineeSuccess(){
-    this.getTraineeList();
-  }
 
    handleChangeTeamNameSuccess(){
 
-  }
-
-  handleAddTrainerSuccess(){
-    this.getTrainerList();
-  }
-
-  componentDidMount() {
-    this.getTraineeList();
-    this.getTrainerList();
-  }
-
-  getTraineeList(){
-    const url = 'http://localhost:8080/trainees?grouped=false'
-    fetch(url)
-      .then(result => {
-        return result.json()
-      })
-      .catch(Error)
-      .then(json => {
-        this.setState({
-          allTrainees:json
-        })
-      })
-  }
-
-
-  getTrainerList(){
-    const url = 'http://localhost:8080/trainers?grouped=false'
-    fetch(url)
-      .then(result => {
-        return result.json()
-      })
-      .catch(Error)
-      .then(json => {
-        this.setState({
-          allTrainers:json
-        })
-      })
   }
 
 
@@ -76,10 +33,8 @@ class App extends Component {
         {this.state.isDivided &&
         <GroupContainer groups={this.state.groups}
                         handleChangeTeamNameSuccess={this.handleChangeTeamNameSuccess.bind(this)} /> }
-        <TrainerContainer allTrainers={this.state.allTrainers}
-                          handleAddTrainerSuccess={this.handleAddTrainerSuccess.bind(this)} />
-        <TraineeContainer allTrainees={this.state.allTrainees}
-                          handleAddTraineeSuccess={this.handleAddTraineeSuccess.bind(this)} />
+        <TrainerContainer />
+        <TraineeContainer />
 
       </div>
     );

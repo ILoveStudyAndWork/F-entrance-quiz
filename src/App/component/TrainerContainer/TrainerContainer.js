@@ -1,19 +1,78 @@
 import React from "react";
 import Trainer from './Trainer';
+import Modal from 'antd/es/modal';
 class TrainerContainer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       addButtonHide: false,
+      allTrainers:[],
+      deleteModalVisible:false,
+      deleteTrainer:'',
     };
 
+  }
+
+  handleCancel = () => {
+    this.setState({
+      deleteModalVisible: false,
+    });
+  };
+
+
+  handelDelete = (trainer) => {
+    this.setState({
+      deleteModalVisible: true,
+      deleteTrainer:trainer,
+    });
+  }
+
+  deleteTrainer = ()=> {
+    const { id } = this.state.deleteTrainer;
+    const url = `http://localhost:8080/trainers/${id}`
+    const options = {
+      method:'DELETE'
+    }
+    fetch(url, options)
+      .then(response => {
+        if (response.status === 204){
+          this.getTrainerList();
+        }
+      })
+      .catch(Error)
+    this.setState({
+      deleteModalVisible: false,
+    });
+  }
+
+  handleAddTrainerSuccess(){
+    this.getTrainerList();
   }
 
   handleAddButtonClick = () => {
     this.setState({
       addButtonHide: true,
     })
+  }
+
+  componentDidMount() {
+    this.getTrainerList();
+  }
+
+
+  getTrainerList(){
+    const url = 'http://localhost:8080/trainers?grouped=false'
+    fetch(url)
+      .then(result => {
+        return result.json()
+      })
+      .catch(Error)
+      .then(json => {
+        this.setState({
+          allTrainers:json
+        })
+      })
   }
 
   addrTrainer = (event) =>  {
@@ -33,7 +92,7 @@ class TrainerContainer extends React.Component {
       fetch(url, options)
         .then(response => {
           if (response.status === HTTP_CREATE){
-            this.props.handleAddTrainerSuccess();
+            this.handleAddTrainerSuccess();
           }
           this.setState({
             addButtonHide:false,
@@ -44,11 +103,12 @@ class TrainerContainer extends React.Component {
   }
 
   render() {
-    const  allTrainers = this.props.allTrainers.map(
+    const  allTrainers = this.state.allTrainers.map(
       item =>
-        <Trainer id={item.id}
+        <Trainer message={item}
                  key={item.id}
-                 name={item.name} />)
+                 handelDelete={this.handelDelete}/>)
+    const { id ,name } = this.state.deleteTrainer;
     return (
       <div>
         <h1>讲师列表</h1>
@@ -63,6 +123,14 @@ class TrainerContainer extends React.Component {
               </button>}
           </div>
         </div>
+        <Modal
+          title="删除讲师"
+          visible={this.state.deleteModalVisible}
+          onOk={this.deleteTrainer}
+          onCancel={this.handleCancel}
+        >
+          <p>是否要删除讲师{id}.{name}？</p>
+        </Modal>
       </div>
     );
   }

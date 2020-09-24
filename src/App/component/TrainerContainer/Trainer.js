@@ -7,12 +7,16 @@ class Trainer extends React.Component {
     this.state = {};
 
   }
+  handelDelete = () => {
+    this.props.handelDelete(this.props.message);
+  }
 
   render() {
+    const { id, name} = this.props.message;
     return (
-        <div className="student-card">
-          <span>{this.props.id}</span>
-          <span>{this.props.name}</span>
+        <div className="student-card" onClick={this.handelDelete}>
+          <span>{id}.</span>
+          <span>{name}</span>
         </div>
 
     );
